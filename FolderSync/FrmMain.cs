@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 using System.IO;
+using System.Drawing;
 
 namespace FolderSync
 {
@@ -15,6 +16,32 @@ namespace FolderSync
             this.clmSourceRoot.Visible = false;
             this.clmTargetRoot.Visible = false;
             loadTasks();
+            
+            Point mouseSet = default(Point);
+            this.MouseDown += (sender, me) =>
+            {
+                if (me.Button == MouseButtons.Left)
+                {
+                    mouseSet = me.Location;
+                }
+            };
+            this.lblLine.MouseMove += (sender, me) =>
+            {
+                // limited by this.panelTestNotes.MinimumSize
+                if (me.Button == MouseButtons.Left)
+                {
+                    int yy = me.Location.Y - mouseSet.Y;
+                    if (this.dgvTask.Height + yy > this.dgvTask.MinimumSize.Height 
+                        && this.dgvLog.Height - yy > this.dgvLog.MinimumSize.Height)
+                    {
+                        this.dgvTask.Height = this.dgvTask.Height + yy;
+                        this.lblLine.Location = new Point(this.lblLine.Location.X, this.lblLine.Location.Y + yy);
+                        this.btnGo.Location = new Point(this.btnGo.Location.X, this.btnGo.Location.Y + yy);
+                        this.dgvLog.Location = new Point(this.dgvLog.Location.X, this.dgvLog.Location.Y + yy);
+                        this.dgvLog.Height = this.dgvLog.Height - yy;
+                    }
+                }
+            };
         }
 
         private void btnGo_Click(object sender, EventArgs e)
@@ -538,6 +565,11 @@ namespace FolderSync
                     catch { }
                 }
             }
+        }
+
+        private void lnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://github.com/lzp729/FolderSync");
         }
     }
 }

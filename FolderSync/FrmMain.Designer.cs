@@ -39,12 +39,6 @@
             this.btnDirect = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
             this.dgvLog = new System.Windows.Forms.DataGridView();
-            this.clmStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSourceRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTargetRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTarget = new System.Windows.Forms.Label();
             this.lblSource = new System.Windows.Forms.Label();
@@ -67,6 +61,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblLine = new System.Windows.Forms.Label();
             this.lnk = new System.Windows.Forms.LinkLabel();
+            this.clmStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSourceRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTargetRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTask)).BeginInit();
@@ -143,50 +143,6 @@
             this.dgvLog.RowHeadersVisible = false;
             this.dgvLog.Size = new System.Drawing.Size(760, 304);
             this.dgvLog.TabIndex = 4;
-            // 
-            // clmStatus
-            // 
-            this.clmStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmStatus.FillWeight = 10F;
-            this.clmStatus.HeaderText = "Status";
-            this.clmStatus.Name = "clmStatus";
-            this.clmStatus.ReadOnly = true;
-            // 
-            // clmAction
-            // 
-            this.clmAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmAction.FillWeight = 10F;
-            this.clmAction.HeaderText = "Action";
-            this.clmAction.Name = "clmAction";
-            this.clmAction.ReadOnly = true;
-            // 
-            // clmSource
-            // 
-            this.clmSource.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmSource.FillWeight = 40F;
-            this.clmSource.HeaderText = "Source";
-            this.clmSource.Name = "clmSource";
-            this.clmSource.ReadOnly = true;
-            // 
-            // clmSourceRoot
-            // 
-            this.clmSourceRoot.HeaderText = "SourceRoot";
-            this.clmSourceRoot.Name = "clmSourceRoot";
-            this.clmSourceRoot.ReadOnly = true;
-            // 
-            // clmTarget
-            // 
-            this.clmTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmTarget.FillWeight = 40F;
-            this.clmTarget.HeaderText = "Target";
-            this.clmTarget.Name = "clmTarget";
-            this.clmTarget.ReadOnly = true;
-            // 
-            // clmTargetRoot
-            // 
-            this.clmTargetRoot.HeaderText = "TargetRoot";
-            this.clmTargetRoot.Name = "clmTargetRoot";
-            this.clmTargetRoot.ReadOnly = true;
             // 
             // panel1
             // 
@@ -460,6 +416,54 @@
             this.lnk.Text = "Get Source";
             this.lnk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_LinkClicked);
             // 
+            // clmStatus
+            // 
+            this.clmStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmStatus.FillWeight = 10F;
+            this.clmStatus.HeaderText = "Status";
+            this.clmStatus.Name = "clmStatus";
+            this.clmStatus.ReadOnly = true;
+            // 
+            // clmAction
+            // 
+            this.clmAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmAction.FillWeight = 10F;
+            this.clmAction.HeaderText = "Action";
+            this.clmAction.Name = "clmAction";
+            this.clmAction.ReadOnly = true;
+            // 
+            // clmSource
+            // 
+            this.clmSource.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmSource.FillWeight = 40F;
+            this.clmSource.HeaderText = "Source";
+            this.clmSource.Name = "clmSource";
+            this.clmSource.ReadOnly = true;
+            // 
+            // clmSourceRoot
+            // 
+            this.clmSourceRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmSourceRoot.FillWeight = 30F;
+            this.clmSourceRoot.HeaderText = "SourceRoot";
+            this.clmSourceRoot.Name = "clmSourceRoot";
+            this.clmSourceRoot.ReadOnly = true;
+            // 
+            // clmTarget
+            // 
+            this.clmTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmTarget.FillWeight = 40F;
+            this.clmTarget.HeaderText = "Target";
+            this.clmTarget.Name = "clmTarget";
+            this.clmTarget.ReadOnly = true;
+            // 
+            // clmTargetRoot
+            // 
+            this.clmTargetRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmTargetRoot.FillWeight = 30F;
+            this.clmTargetRoot.HeaderText = "TargetRoot";
+            this.clmTargetRoot.Name = "clmTargetRoot";
+            this.clmTargetRoot.ReadOnly = true;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -506,12 +510,6 @@
         private System.Windows.Forms.Label lblTarget;
         private System.Windows.Forms.Label lblSource;
         private System.Windows.Forms.Label lblStat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmAction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSourceRoot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTarget;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmTargetRoot;
         private System.Windows.Forms.CheckBox chkTrimRoot;
         private System.Windows.Forms.DataGridView dgvTask;
         private DataGridViewCheckedComboxBoxColumn dataGridViewCheckedListBoxColumn1;
@@ -523,6 +521,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblLine;
         private System.Windows.Forms.LinkLabel lnk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSourceRoot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTarget;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTargetRoot;
     }
 }
 

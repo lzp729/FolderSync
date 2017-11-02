@@ -53,10 +53,10 @@ namespace FolderSync
         
         public override void ResetLoc()
         {
-            if (LocLocal.NativeMethods.IsLocalPath(_originalPath))
-                this.LocDelim = Path.DirectorySeparatorChar;
-            else
-                this.LocDelim = Path.AltDirectorySeparatorChar;
+            //if (LocLocal.NativeMethods.IsLocalPath(_originalPath))
+            //    this.LocDelim = Path.DirectorySeparatorChar;
+            //else
+            //    this.LocDelim = Path.AltDirectorySeparatorChar;
             this.RootLoc = Path.GetFullPath(_originalPath);
             this.CurrentLoc = "";
         }

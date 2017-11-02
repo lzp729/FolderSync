@@ -43,157 +43,7 @@ namespace FolderSync
                 }
             };
         }
-
-        private void btnGo_Click(object sender, EventArgs e)
-        {
-            if (trdSync == null)
-            {
-                LocBase locSource = LocBase.GetInstance(this.txtSource.Text);
-                LocBase locTarget = LocBase.GetInstance(this.txtTarget.Text);
-
-                if (locSource == null)
-                {
-                    MessageBox.Show("Unsupported source path");
-                    return;
-                }
-
-                if (locTarget == null)
-                {
-                    MessageBox.Show("Unsupported target path");
-                    return;
-                }
-
-                if (locSource.RootLoc.ToLower().Contains(locTarget.RootLoc.ToLower()) ||
-                    locTarget.RootLoc.ToLower().Contains(locSource.RootLoc.ToLower()))
-                {
-                    MessageBox.Show("Nested path");
-                    return;
-                }
-
-                LocSyncDirection dirc = LocSyncDirection.EM_TO;
-
-                switch (this.btnDirect.Text)
-                {
-                    case "=>":
-                        dirc = LocSyncDirection.EM_TO;
-                        break;
-                    case "<=":
-                        dirc = LocSyncDirection.EM_FROM;
-                        break;
-                    case "<=>":
-                        dirc = LocSyncDirection.EM_BI;
-                        break;
-                }
-
-                if (dirc == LocSyncDirection.EM_BI)
-                {
-                    MessageBox.Show("Bi-direction sync not implemented");
-                    return;
-                }
-
-                currentTask = new LocSync(locSource, locTarget, dirc);
-                currentTask.Dryrun = chkDryRun.Checked;
-                currentTask.AddFile = chkAddFile.Checked;
-                currentTask.DelFile = chkDelFile.Checked;
-                currentTask.AddFolder = chkAddFolder.Checked;
-                currentTask.DelFolder = chkDelFolder.Checked;
-                currentTask.SyncTimestamp = chkSyncTimestamp.Checked;
-                currentTask.SyncProperties = chkSyncProperties.Checked;
-
-                if (currentTask.Dryrun && currentTask.AddFolder)
-                    MessageBox.Show("folders will be created still even in dryrun");
-
-                if (currentTask.SyncTimestamp || currentTask.SyncProperties)
-                    MessageBox.Show("timestamp or properties sync is not implemented yet");
-
-                if (MessageBox.Show("Good to go?", "Folder Sync", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                    return;
-
-                this.dgvLog.Rows.Clear();
-                this.lblStat.Text = "";
-
-                Dictionary<LocSyncStatus, int> countStatus = new Dictionary<LocSyncStatus, int>()
-            {
-                { LocSyncStatus.EM_ERROR, 0 },
-                { LocSyncStatus.EM_WARNING, 0 },
-                { LocSyncStatus.EM_OK, 0 },
-            };
-
-                Dictionary<LocSyncAction, int> countAction = new Dictionary<LocSyncAction, int>()
-            {
-                { LocSyncAction.EM_IGNORE_TIMESTAMP, 0 },
-                { LocSyncAction.EM_REPLACE, 0 },
-                { LocSyncAction.EM_ADD_FILE, 0 },
-                { LocSyncAction.EM_ADD_FOLDER, 0 },
-                { LocSyncAction.EM_DELETE_FILE, 0 },
-                { LocSyncAction.EM_DELETE_FOLDER, 0 },
-            };
-
-                currentTask.SyncUpdateEvent += (senderr, ee) =>
-                {
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        if (!this.chkTrimRoot.Checked)
-                            this.dgvLog.Rows.Add(
-                                LocSync.LocSyncStatusString[ee.status],
-                                LocSync.LocSyncActionString[ee.action],
-                                ee.source,
-                                ee.sourceLoc.RootLoc,
-                                ee.target,
-                                ee.targetLoc.RootLoc
-                                );
-                        else
-                            this.dgvLog.Rows.Add(
-                                LocSync.LocSyncStatusString[ee.status],
-                                LocSync.LocSyncActionString[ee.action],
-                                ee.source.StartsWith(ee.sourceLoc.RootLoc) ?
-                                    ee.source.Substring(ee.sourceLoc.RootLoc.Length) :
-                                    ee.source,
-                                ee.sourceLoc.RootLoc,
-                                ee.target.Substring(ee.targetLoc.RootLoc.Length),
-                                ee.targetLoc.RootLoc
-                                );
-
-                        ++countStatus[ee.status];
-                        ++countAction[ee.action];
-
-                        this.dgvLog.FirstDisplayedScrollingRowIndex = this.dgvLog.Rows.Count - 1;
-                        this.lblStat.Text = string.Format
-                        ("Total: Error {0,6},    Warning {1,6},    OK {2,6}\n" +
-                         "Ignored: {3,10},    Replace: {4, 10},    File Added: {5, 10},    Folder Added: {6, 10},    File Deleted: {7, 10},    Folder Deleted: {8, 10}",
-                         countStatus[LocSyncStatus.EM_ERROR], countStatus[LocSyncStatus.EM_WARNING], countStatus[LocSyncStatus.EM_OK],
-                         countAction[LocSyncAction.EM_IGNORE_TIMESTAMP], countAction[LocSyncAction.EM_REPLACE], countAction[LocSyncAction.EM_ADD_FILE],
-                         countAction[LocSyncAction.EM_ADD_FOLDER], countAction[LocSyncAction.EM_DELETE_FILE], countAction[LocSyncAction.EM_DELETE_FOLDER]
-                         );
-                    });
-                };
-
-                this.btnGo.Text = "Stop";
-                syncing = true;
-
-                trdSync = new Thread(new ThreadStart(
-                    () =>
-                    {
-                        currentTask.Start();
-                        EndSync();
-                    }));
-
-                trdSync.Start();
-            }
-            else
-            {
-                syncing = false;
-                currentTask.Stop();
-                new Thread(new ThreadStart(
-                    () =>
-                    {
-                        trdSync.Join();
-                        EndSync();
-                    }
-                )).Start();
-            }
-        }
-
+        
         private void btnGo_Click2(object sender, EventArgs e)
         {
             if (trdSync == null)
@@ -303,22 +153,30 @@ namespace FolderSync
                                         LocSync.LocSyncStatusString[ee.status],
                                         LocSync.LocSyncActionString[ee.action],
                                         ee.source,
-                                        ee.sourceLoc.RootLoc,
+                                        //ee.sourceLoc.RootLoc
+                                        ee.sourceLoc.CurrentURL.Substring(0, ee.sourceLoc.CurrentURL.IndexOf(ee.sourceLoc.RootLoc)) + ee.sourceLoc.RootLoc,
                                         ee.target,
-                                        ee.targetLoc.RootLoc
+                                        //ee.targetLoc.RootLoc
+                                        ee.targetLoc.CurrentURL.Substring(0, ee.targetLoc.CurrentURL.IndexOf(ee.targetLoc.RootLoc)) + ee.targetLoc.RootLoc
                                         );
                                 else
+                                {
+                                    string sourceRoot = ee.sourceLoc.CurrentURL.Substring(0, ee.sourceLoc.CurrentURL.IndexOf(ee.sourceLoc.RootLoc)) + ee.sourceLoc.RootLoc;
+                                    string targetRoot = ee.targetLoc.CurrentURL.Substring(0, ee.targetLoc.CurrentURL.IndexOf(ee.targetLoc.RootLoc)) + ee.targetLoc.RootLoc;
+
                                     this.dgvLog.Rows.Add(
                                         LocSync.LocSyncStatusString[ee.status],
                                         LocSync.LocSyncActionString[ee.action],
                                         ee.source.StartsWith(ee.sourceLoc.RootLoc) ?
                                             ee.source.Substring(ee.sourceLoc.RootLoc.Length) :
                                             ee.source,
-                                        ee.sourceLoc.RootLoc,
+                                        //ee.sourceLoc.RootLoc,
+                                        sourceRoot,
                                         ee.target.Substring(ee.targetLoc.RootLoc.Length),
-                                        ee.targetLoc.RootLoc
+                                        //ee.targetLoc.RootLoc
+                                        targetRoot
                                         );
-
+                                }
                                 this.dgvLog.FirstDisplayedScrollingRowIndex = this.dgvLog.Rows.Count - 1;
 
 

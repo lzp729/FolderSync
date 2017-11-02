@@ -147,8 +147,12 @@ namespace FolderSync
                             {
                                 status = LocSyncStatus.EM_OK,
                                 action = LocSyncAction.EM_REPLACE,
-                                source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
-                                target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
+                                //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = source.CurrentURL + source.LocDelim + sourceFile,
+                                //target = target.CurrentURL + target.LocDelim + sourceFile,
+                                source = source.CurrentURL + sourceFile,
+                                target = target.CurrentURL + sourceFile,
                                 sourceLoc = source,
                                 targetLoc = target
                             });
@@ -159,8 +163,12 @@ namespace FolderSync
                             {
                                 status = LocSyncStatus.EM_ERROR,
                                 action = LocSyncAction.EM_REPLACE,
-                                source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
-                                target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
+                                //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = source.CurrentURL + source.LocDelim + sourceFile,
+                                //target = target.CurrentURL + target.LocDelim + sourceFile,
+                                source = source.CurrentURL + sourceFile,
+                                target = target.CurrentURL + sourceFile,
                                 sourceLoc = source,
                                 targetLoc = target
                             });
@@ -173,8 +181,12 @@ namespace FolderSync
                         {
                             status = LocSyncStatus.EM_WARNING,
                             action = LocSyncAction.EM_IGNORE_TIMESTAMP,
-                            source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
-                            target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
+                            //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //source = source.CurrentURL + source.LocDelim + sourceFile,
+                            //target = target.CurrentURL + target.LocDelim + sourceFile,
+                            source = source.CurrentURL + sourceFile,
+                            target = target.CurrentURL + sourceFile,
                             sourceLoc = source,
                             targetLoc = target
                         });
@@ -194,8 +206,12 @@ namespace FolderSync
                             {
                                 status = LocSyncStatus.EM_OK,
                                 action = LocSyncAction.EM_ADD_FILE,
-                                source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
-                                target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
+                                //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = source.CurrentURL + source.LocDelim + sourceFile,
+                                //target = target.CurrentURL + target.LocDelim + sourceFile,
+                                source = source.CurrentURL + sourceFile,
+                                target = target.CurrentURL + sourceFile,
                                 sourceLoc = source,
                                 targetLoc = target
                             });
@@ -206,8 +222,12 @@ namespace FolderSync
                             {
                                 status = LocSyncStatus.EM_ERROR,
                                 action = LocSyncAction.EM_ADD_FILE,
-                                source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
-                                target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = Regex.Replace(source.CurrentURL + source.LocDelim + sourceFile, source.LocDelim + "+", source.LocDelim.ToString()),
+                                //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //source = source.CurrentURL + source.LocDelim + sourceFile,
+                                //target = target.CurrentURL + target.LocDelim + sourceFile,
+                                source = source.CurrentURL + sourceFile,
+                                target = target.CurrentURL + sourceFile,
                                 sourceLoc = source,
                                 targetLoc = target
                             });
@@ -238,7 +258,9 @@ namespace FolderSync
                             status = LocSyncStatus.EM_OK,
                             action = LocSyncAction.EM_DELETE_FILE,
                             source = "",
-                            target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = target.CurrentURL + target.LocDelim + targetFile,
+                            target = target.CurrentURL + targetFile,
                             sourceLoc = source,
                             targetLoc = target
                         });
@@ -250,7 +272,9 @@ namespace FolderSync
                             status = LocSyncStatus.EM_ERROR,
                             action = LocSyncAction.EM_DELETE_FILE,
                             source = "",
-                            target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFile, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = target.CurrentURL + target.LocDelim + targetFile,
+                            target = target.CurrentURL + targetFile,
                             sourceLoc = source,
                             targetLoc = target
                         });
@@ -292,7 +316,9 @@ namespace FolderSync
                                 status = LocSyncStatus.EM_OK,
                                 action = LocSyncAction.EM_ADD_FOLDER,
                                 source = "",
-                                target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //target = target.CurrentURL + target.LocDelim + sourceFolder,
+                                target = target.CurrentURL + sourceFolder,
                                 sourceLoc = source,
                                 targetLoc = target
                             });
@@ -304,7 +330,9 @@ namespace FolderSync
                                 status = LocSyncStatus.EM_ERROR,
                                 action = LocSyncAction.EM_ADD_FOLDER,
                                 source = "",
-                                target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //target = Regex.Replace(target.CurrentURL + target.LocDelim + sourceFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                                //target = target.CurrentURL + target.LocDelim + sourceFolder,
+                                target = target.CurrentURL + sourceFolder,
                                 sourceLoc = source,
                                 targetLoc = target
                             });
@@ -341,7 +369,9 @@ namespace FolderSync
                             status = LocSyncStatus.EM_OK,
                             action = LocSyncAction.EM_DELETE_FOLDER,
                             source = "",
-                            target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = target.CurrentURL + target.LocDelim + targetFolder,
+                            target = target.CurrentURL + targetFolder,
                             sourceLoc = source,
                             targetLoc = target
                         });
@@ -353,7 +383,9 @@ namespace FolderSync
                             status = LocSyncStatus.EM_ERROR,
                             action = LocSyncAction.EM_DELETE_FOLDER,
                             source = "",
-                            target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = Regex.Replace(target.CurrentURL + target.LocDelim + targetFolder, target.LocDelim + "+", target.LocDelim.ToString()),
+                            //target = target.CurrentURL + target.LocDelim + targetFolder,
+                            target = target.CurrentURL + targetFolder,
                             sourceLoc = source,
                             targetLoc = target
                         });

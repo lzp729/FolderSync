@@ -168,11 +168,11 @@ namespace FolderSync
                                         LocSync.LocSyncStatusString[ee.status],
                                         LocSync.LocSyncActionString[ee.action],
                                         ee.source.StartsWith(ee.sourceLoc.RootLoc) ?
-                                            ee.source.Substring(ee.sourceLoc.RootLoc.Length) :
+                                            ee.source.Substring(sourceRoot.Length) :
                                             ee.source,
                                         //ee.sourceLoc.RootLoc,
                                         sourceRoot,
-                                        ee.target.Substring(ee.targetLoc.RootLoc.Length),
+                                        ee.target.Substring(targetRoot.Length),
                                         //ee.targetLoc.RootLoc
                                         targetRoot
                                         );
@@ -219,6 +219,22 @@ namespace FolderSync
                                 break;
 
                             currentTask = onesync;
+
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                foreach (DataGridViewRow row in this.dgvTask.Rows)
+                                {
+                                    if (row.Cells["clmTaskEnable"].Value != null
+                                     && (bool)(row.Cells["clmTaskEnable"] as DataGridViewCheckBoxCell).Value == true
+                                     && currentTask.SourceLoc.OriginalPath == row.Cells["clmTaskSource"].Value.ToString()
+                                     && currentTask.TargetLoc.OriginalPath == row.Cells["clmTaskTarget"].Value.ToString())
+                                    {
+                                        this.dgvTask.ClearSelection();
+                                        row.Selected = true;
+                                    }
+                                }
+                            });
+                            
                             currentTask.Start();
                         }
 
@@ -428,6 +444,12 @@ namespace FolderSync
         private void lnk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(@"https://github.com/lzp729/FolderSync");
+        }
+
+        private void chkShowRoot_CheckedChanged(object sender, EventArgs e)
+        {
+            this.clmSourceRoot.Visible = this.chkShowRoot.Checked;
+            this.clmTargetRoot.Visible = this.chkShowRoot.Checked;
         }
     }
 }

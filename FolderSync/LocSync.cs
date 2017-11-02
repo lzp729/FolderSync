@@ -84,6 +84,18 @@ namespace FolderSync
             direction = drc;
         }
 
+        public LocBase SourceLoc
+        {
+            get { return source; }
+        }
+        public LocBase TargetLoc
+        {
+            get { return target; }
+        }
+
+
+
+
         public void Start()
         {
             if (source == null || target == null)

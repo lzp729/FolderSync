@@ -68,6 +68,10 @@ namespace FolderSync
         {
             get { return RootLoc + this.LocDelim + CurrentLoc; }
         }
+        public virtual string OriginalPath
+        {
+            get { return _originalPath; }
+        }
 
 
         abstract public void ResetLoc();

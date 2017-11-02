@@ -28,17 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtSource = new System.Windows.Forms.TextBox();
             this.txtTarget = new System.Windows.Forms.TextBox();
             this.btnDirect = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
             this.dgvLog = new System.Windows.Forms.DataGridView();
+            this.clmStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSourceRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTargetRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTarget = new System.Windows.Forms.Label();
             this.lblSource = new System.Windows.Forms.Label();
@@ -61,12 +67,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblLine = new System.Windows.Forms.Label();
             this.lnk = new System.Windows.Forms.LinkLabel();
-            this.clmStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmSourceRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTarget = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTargetRoot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkShowRoot = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTask)).BeginInit();
@@ -119,14 +120,14 @@
             this.dgvLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmStatus,
@@ -143,6 +144,54 @@
             this.dgvLog.RowHeadersVisible = false;
             this.dgvLog.Size = new System.Drawing.Size(760, 304);
             this.dgvLog.TabIndex = 4;
+            // 
+            // clmStatus
+            // 
+            this.clmStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmStatus.FillWeight = 10F;
+            this.clmStatus.HeaderText = "Status";
+            this.clmStatus.Name = "clmStatus";
+            this.clmStatus.ReadOnly = true;
+            // 
+            // clmAction
+            // 
+            this.clmAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmAction.FillWeight = 10F;
+            this.clmAction.HeaderText = "Action";
+            this.clmAction.Name = "clmAction";
+            this.clmAction.ReadOnly = true;
+            // 
+            // clmSource
+            // 
+            this.clmSource.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmSource.FillWeight = 40F;
+            this.clmSource.HeaderText = "Source";
+            this.clmSource.Name = "clmSource";
+            this.clmSource.ReadOnly = true;
+            // 
+            // clmSourceRoot
+            // 
+            this.clmSourceRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmSourceRoot.FillWeight = 30F;
+            this.clmSourceRoot.HeaderText = "SourceRoot";
+            this.clmSourceRoot.Name = "clmSourceRoot";
+            this.clmSourceRoot.ReadOnly = true;
+            // 
+            // clmTarget
+            // 
+            this.clmTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmTarget.FillWeight = 40F;
+            this.clmTarget.HeaderText = "Target";
+            this.clmTarget.Name = "clmTarget";
+            this.clmTarget.ReadOnly = true;
+            // 
+            // clmTargetRoot
+            // 
+            this.clmTargetRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmTargetRoot.FillWeight = 30F;
+            this.clmTargetRoot.HeaderText = "TargetRoot";
+            this.clmTargetRoot.Name = "clmTargetRoot";
+            this.clmTargetRoot.ReadOnly = true;
             // 
             // panel1
             // 
@@ -294,14 +343,14 @@
             this.dgvTask.AllowUserToResizeRows = false;
             this.dgvTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTask.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTask.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvTask.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTask.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmTaskEnable,
@@ -332,8 +381,8 @@
             // clmTaskSource
             // 
             this.clmTaskSource.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.clmTaskSource.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.clmTaskSource.DefaultCellStyle = dataGridViewCellStyle9;
             this.clmTaskSource.FillWeight = 35F;
             this.clmTaskSource.HeaderText = "Source";
             this.clmTaskSource.Name = "clmTaskSource";
@@ -342,8 +391,8 @@
             // clmTaskDirc
             // 
             this.clmTaskDirc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.clmTaskDirc.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clmTaskDirc.DefaultCellStyle = dataGridViewCellStyle10;
             this.clmTaskDirc.FillWeight = 10F;
             this.clmTaskDirc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clmTaskDirc.HeaderText = "Direction";
@@ -357,8 +406,8 @@
             // clmTaskTarget
             // 
             this.clmTaskTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
-            this.clmTaskTarget.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Red;
+            this.clmTaskTarget.DefaultCellStyle = dataGridViewCellStyle11;
             this.clmTaskTarget.FillWeight = 35F;
             this.clmTaskTarget.HeaderText = "Target";
             this.clmTaskTarget.Name = "clmTaskTarget";
@@ -368,8 +417,8 @@
             // clmTaskSetting
             // 
             this.clmTaskSetting.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.clmTaskSetting.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clmTaskSetting.DefaultCellStyle = dataGridViewCellStyle12;
             this.clmTaskSetting.FillWeight = 20F;
             this.clmTaskSetting.HeaderText = "Setting";
             this.clmTaskSetting.Name = "clmTaskSetting";
@@ -416,59 +465,24 @@
             this.lnk.Text = "Get Source";
             this.lnk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnk_LinkClicked);
             // 
-            // clmStatus
+            // chkShowRoot
             // 
-            this.clmStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmStatus.FillWeight = 10F;
-            this.clmStatus.HeaderText = "Status";
-            this.clmStatus.Name = "clmStatus";
-            this.clmStatus.ReadOnly = true;
-            // 
-            // clmAction
-            // 
-            this.clmAction.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmAction.FillWeight = 10F;
-            this.clmAction.HeaderText = "Action";
-            this.clmAction.Name = "clmAction";
-            this.clmAction.ReadOnly = true;
-            // 
-            // clmSource
-            // 
-            this.clmSource.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmSource.FillWeight = 40F;
-            this.clmSource.HeaderText = "Source";
-            this.clmSource.Name = "clmSource";
-            this.clmSource.ReadOnly = true;
-            // 
-            // clmSourceRoot
-            // 
-            this.clmSourceRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmSourceRoot.FillWeight = 30F;
-            this.clmSourceRoot.HeaderText = "SourceRoot";
-            this.clmSourceRoot.Name = "clmSourceRoot";
-            this.clmSourceRoot.ReadOnly = true;
-            // 
-            // clmTarget
-            // 
-            this.clmTarget.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmTarget.FillWeight = 40F;
-            this.clmTarget.HeaderText = "Target";
-            this.clmTarget.Name = "clmTarget";
-            this.clmTarget.ReadOnly = true;
-            // 
-            // clmTargetRoot
-            // 
-            this.clmTargetRoot.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.clmTargetRoot.FillWeight = 30F;
-            this.clmTargetRoot.HeaderText = "TargetRoot";
-            this.clmTargetRoot.Name = "clmTargetRoot";
-            this.clmTargetRoot.ReadOnly = true;
+            this.chkShowRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkShowRoot.AutoSize = true;
+            this.chkShowRoot.Location = new System.Drawing.Point(601, 585);
+            this.chkShowRoot.Name = "chkShowRoot";
+            this.chkShowRoot.Size = new System.Drawing.Size(74, 17);
+            this.chkShowRoot.TabIndex = 16;
+            this.chkShowRoot.Text = "Show root";
+            this.chkShowRoot.UseVisualStyleBackColor = true;
+            this.chkShowRoot.CheckedChanged += new System.EventHandler(this.chkShowRoot_CheckedChanged);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 621);
+            this.Controls.Add(this.chkShowRoot);
             this.Controls.Add(this.lnk);
             this.Controls.Add(this.lblLine);
             this.Controls.Add(this.label1);
@@ -527,6 +541,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmSourceRoot;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTarget;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTargetRoot;
+        private System.Windows.Forms.CheckBox chkShowRoot;
     }
 }
 

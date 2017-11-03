@@ -58,16 +58,16 @@ namespace FolderSync
             //else
             //    this.LocDelim = Path.AltDirectorySeparatorChar;
             this.RootLoc = Path.GetFullPath(_originalPath);
-            this.CurrentLoc = "";
+            this.CurrentURN = "";
         }
         public override void StepIn(string loc)
         {
-            CurrentLoc += LocDelim + loc;
-            CurrentLoc = CurrentLoc.Trim( new char[] { LocDelim});
+            CurrentURN += LocDelim + loc;
+            CurrentURN = CurrentURN.Trim( new char[] { LocDelim});
         }
         public override void StepOut()
         {
-            CurrentLoc = CurrentLoc.Substring(0, CurrentLoc.LastIndexOf(LocDelim) + 1).Trim(new char[] { LocDelim });
+            CurrentURN = CurrentURN.Substring(0, CurrentURN.LastIndexOf(LocDelim) + 1).Trim(new char[] { LocDelim });
         }
 
 

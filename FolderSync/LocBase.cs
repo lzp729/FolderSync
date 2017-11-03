@@ -38,7 +38,7 @@ namespace FolderSync
 
                     ftp._session.PutFiles(
                         source.CurrentURL + source.LocDelim + fileName,
-                        ftp.LocDelim + ftp.RootLoc + ftp.LocDelim + ftp.CurrentLoc + ftp.LocDelim + fileName,
+                        ftp.LocDelim + ftp.RootLoc + ftp.LocDelim + ftp.CurrentURN + ftp.LocDelim + fileName,
                         false).Check();
                     return;
                 }
@@ -59,14 +59,14 @@ namespace FolderSync
             get { return _rootLocation; }
             set { _rootLocation = value; }
         }
-        public virtual string CurrentLoc
+        public virtual string CurrentURN
         {
             get { return _currentLocation; }
             set { _currentLocation = value; }
         }
         public virtual string CurrentURL
         {
-            get { return RootLoc + this.LocDelim + CurrentLoc; }
+            get { return (RootLoc + this.LocDelim + CurrentURN).TrimEnd(this.LocDelim)+ this.LocDelim; }
         }
         public virtual string OriginalPath
         {

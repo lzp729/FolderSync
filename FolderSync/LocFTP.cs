@@ -35,7 +35,7 @@ namespace FolderSync
         }
         public override string CurrentURL
         {
-            get { return _ftpURLPreifx + _sessionOptions.HostName + LocDelim + RootLoc + LocDelim + CurrentLoc; }
+            get { return _ftpURLPreifx + _sessionOptions.HostName + LocDelim + RootLoc + LocDelim + CurrentURN; }
         }
 
 
@@ -48,18 +48,18 @@ namespace FolderSync
             _sessionOptions.ParseUrl(_ftpURLPreifx + mc[0].Groups["serverpath"].ToString());
 
             this.RootLoc = mc[0].Groups["rootpath"].ToString().Trim(LocDelim);
-            this.CurrentLoc = "";
+            this.CurrentURN = "";
 
             this.GetFiles();
         }
         public override void StepIn(string loc)
         {
-            CurrentLoc += LocDelim + loc;
-            CurrentLoc = CurrentLoc.Trim(new char[] { LocDelim });
+            CurrentURN += LocDelim + loc;
+            CurrentURN = CurrentURN.Trim(new char[] { LocDelim });
         }
         public override void StepOut()
         {
-            CurrentLoc = CurrentLoc.Substring(0, CurrentLoc.LastIndexOf(LocDelim) + 1).Trim(new char[] { LocDelim });
+            CurrentURN = CurrentURN.Substring(0, CurrentURN.LastIndexOf(LocDelim) + 1).Trim(new char[] { LocDelim });
         }
 
 
@@ -70,7 +70,7 @@ namespace FolderSync
 
             List<string> files = new List<string>();
 
-            RemoteDirectoryInfo info = _session.ListDirectory(LocDelim + RootLoc + LocDelim + CurrentLoc);
+            RemoteDirectoryInfo info = _session.ListDirectory(LocDelim + RootLoc + LocDelim + CurrentURN);
             foreach (RemoteFileInfo file in info.Files)
             {
                 if (!file.IsDirectory)
@@ -87,7 +87,7 @@ namespace FolderSync
 
             List<string> folders = new List<string>();
 
-            RemoteDirectoryInfo info = _session.ListDirectory(LocDelim + RootLoc + LocDelim + CurrentLoc);
+            RemoteDirectoryInfo info = _session.ListDirectory(LocDelim + RootLoc + LocDelim + CurrentURN);
             foreach (RemoteFileInfo folder in info.Files)
             {
                 if (folder.IsDirectory && folder.Name != ".." && folder.Name != ".")
@@ -102,7 +102,7 @@ namespace FolderSync
             if (!_session.Opened)
                 _session.Open(_sessionOptions);
             
-            _session.CreateDirectory(LocDelim + RootLoc + LocDelim + CurrentLoc + LocDelim + subLoc);
+            _session.CreateDirectory(LocDelim + RootLoc + LocDelim + CurrentURN + LocDelim + subLoc);
         }
 
         public override void RemoveFolder(string subLoc)
@@ -110,7 +110,7 @@ namespace FolderSync
             if (!_session.Opened)
                 _session.Open(_sessionOptions);
 
-            _session.RemoveFiles(LocDelim + RootLoc + LocDelim + CurrentLoc + LocDelim + subLoc);
+            _session.RemoveFiles(LocDelim + RootLoc + LocDelim + CurrentURN + LocDelim + subLoc);
         }
 
         public override void RemoveFile(string fileName)
@@ -118,7 +118,7 @@ namespace FolderSync
             if (!_session.Opened)
                 _session.Open(_sessionOptions);
 
-            _session.RemoveFiles(LocDelim + RootLoc + LocDelim + CurrentLoc + LocDelim + fileName);
+            _session.RemoveFiles(LocDelim + RootLoc + LocDelim + CurrentURN + LocDelim + fileName);
         }
 
         public override DateTime GetFileLastUpdateTimestamp(string fileName)
@@ -126,7 +126,7 @@ namespace FolderSync
             if (!_session.Opened)
                 _session.Open(_sessionOptions);
 
-            DateTime dt = _session.GetFileInfo(LocDelim + RootLoc + LocDelim + CurrentLoc + LocDelim + fileName).LastWriteTime;
+            DateTime dt = _session.GetFileInfo(LocDelim + RootLoc + LocDelim + CurrentURN + LocDelim + fileName).LastWriteTime;
             return dt.AddTicks(0 - dt.Ticks % TimeSpan.TicksPerSecond);
         }
     }

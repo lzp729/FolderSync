@@ -21,23 +21,23 @@ namespace FolderSync
             return null;
         }
 
-        static public void SyncFile(LocBase source, LocBase target, string fileName)
+        static public void SyncFile(LocSync syncControl, LocBase source, LocBase target, string fileName)
         {
             if (source is LocLocal)
             {
                 if (target is LocLocal)
                 {
-                    File.Copy(source.CurrentURL + source.LocDelim + fileName,
-                        target.CurrentURL + source.LocDelim + fileName,true);
+                    LocLocal.FileCopy(syncControl, Path.Combine(source.CurrentURL, fileName),
+                        Path.Combine(target.CurrentURL, fileName));
                     return;
                 }
 
                 if (target is LocFTP)
                 {
                     LocFTP ftp = target as LocFTP;
-
+                    
                     ftp._session.PutFiles(
-                        source.CurrentURL + source.LocDelim + fileName,
+                        Path.Combine(source.CurrentURL, fileName),
                         ftp.LocDelim + ftp.RootLoc + ftp.LocDelim + ftp.CurrentURN + ftp.LocDelim + fileName,
                         false).Check();
                     return;
@@ -46,8 +46,7 @@ namespace FolderSync
 
             throw new NotImplementedException();
         }
-
-
+        
         protected string _originalPath = "";
         protected string _rootLocation = "";
         protected string _currentLocation = "";

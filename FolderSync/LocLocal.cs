@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FolderSync
@@ -36,7 +37,72 @@ namespace FolderSync
             return Directory.Exists(path);
         }
 
-        
+        static public void FileCopy(LocSync syncControl, string source, string destination, int bufsize = 524288) //512K
+        {
+            long file_size = new System.IO.FileInfo(source).Length;
+            int array_length = bufsize;
+            byte[] dataArray = new byte[array_length];
+
+            string destination_mask = destination + ".ing";
+
+            using (FileStream fsread = new FileStream
+            (source, FileMode.Open, FileAccess.Read, FileShare.None, array_length))
+            {
+                using (BinaryReader bwread = new BinaryReader(fsread))
+                {
+                    using (FileStream fswrite = new FileStream
+                    (destination_mask, FileMode.Create, FileAccess.Write, FileShare.None, array_length))
+                    {
+                        using (BinaryWriter bwwrite = new BinaryWriter(fswrite))
+                        {
+                            long copied_size = 0;
+                            int retris = 0;
+                            while (copied_size < file_size)
+                            {
+                                if (!syncControl.syncing)
+                                    throw new IOException("Stop to sync file");
+
+                                int read = bwread.Read(dataArray, 0, array_length);
+                                copied_size += read;
+                                if (0 == read)
+                                {
+                                    if (copied_size == file_size)
+                                        break;
+                                    else
+                                    {
+                                        if (retris == 10)
+                                            throw new IOException("Failed to read source");
+                                        ++retris;
+                                        Thread.Sleep(500);
+                                    }
+                                }
+                                else
+                                    retris = 0;
+                                bwwrite.Write(dataArray, 0, read);
+                                bwwrite.Flush();
+                            }
+                        }
+                    }
+                }
+            }
+            if (File.Exists(destination))
+                File.Delete(destination);
+            File.Move(destination_mask, destination);
+
+            if (syncControl.SyncTimestamp)
+            {
+                try
+                {
+                    DateTime dt = File.GetLastWriteTime(source);
+                    File.SetLastWriteTime(destination, dt);
+                }
+                catch
+                {
+                    throw new IOException("Failed to sync timestamp");
+                }
+            }
+        }
+
         public LocLocal(string path)
         {
             this._originalPath = path;
@@ -53,10 +119,6 @@ namespace FolderSync
         
         public override void ResetLoc()
         {
-            //if (LocLocal.NativeMethods.IsLocalPath(_originalPath))
-            //    this.LocDelim = Path.DirectorySeparatorChar;
-            //else
-            //    this.LocDelim = Path.AltDirectorySeparatorChar;
             this.RootLoc = Path.GetFullPath(_originalPath);
             this.CurrentURN = "";
         }
@@ -65,6 +127,7 @@ namespace FolderSync
             CurrentURN += LocDelim + loc;
             CurrentURN = CurrentURN.Trim( new char[] { LocDelim});
         }
+
         public override void StepOut()
         {
             CurrentURN = CurrentURN.Substring(0, CurrentURN.LastIndexOf(LocDelim) + 1).Trim(new char[] { LocDelim });

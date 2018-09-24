@@ -70,12 +70,11 @@ namespace FolderSync
         public bool DelFolder = true;
         public bool SyncTimestamp = true;
         public bool SyncProperties = true;
+        public bool syncing = false;
 
-        
         LocBase source = null;
         LocBase target = null;
         LocSyncDirection direction = LocSyncDirection.EM_TO;
-        bool syncing = false;
 
         public LocSync(LocBase s, LocBase t, LocSyncDirection drc)
         {
@@ -153,7 +152,7 @@ namespace FolderSync
                         try
                         {
                             if (!Dryrun)
-                                LocBase.SyncFile(source, target, sourceFile);
+                                LocBase.SyncFile(this, source, target, sourceFile);
 
                             SyncUpdateEvent(this, new LocSyncEventArgs()
                             {
@@ -169,7 +168,7 @@ namespace FolderSync
                                 targetLoc = target
                             });
                         }
-                        catch(Exception ex)
+                        catch(Exception)
                         {
                             SyncUpdateEvent(this, new LocSyncEventArgs()
                             {
@@ -212,7 +211,7 @@ namespace FolderSync
                         try
                         {
                             if (!Dryrun)
-                                LocBase.SyncFile(source, target, sourceFile);
+                                LocBase.SyncFile(this, source, target, sourceFile);
 
                             SyncUpdateEvent(this, new LocSyncEventArgs()
                             {
@@ -293,13 +292,13 @@ namespace FolderSync
                     }
                 }
             }
-
-            List<string> sourceFolders = new List<string>();
-            List<string> targetFolders = new List<string>();
-
+            
             if (!syncing)
                 return;
 
+            List<string> sourceFolders = new List<string>();
+            List<string> targetFolders = new List<string>();
+            
             sourceFolders = source.GetFolders();
             targetFolders = target.GetFolders();
 
